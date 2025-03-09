@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base::layout(~{::section})}">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Add Product</title>
+    <style>
+        .woman-friendly-card {
+            background-color: #f8f0f5;
+            border: 1px solid #fce4ec;
+            border-radius: 10px;
+        }
+
+        .woman-friendly-btn {
+            background-color: #e91e63;
+            border-color: #e91e63;
+            color: white;
+        }
+
+        .woman-friendly-btn:hover {
+            background-color: #d11141;
+            border-color: #d11141;
+        }
+    </style>
+</head>
+<body>
+    <section>
+        <div class="container p-5 mt-3">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="card woman-friendly-card">
+                        <div class="card-header text-center">
+                            <p class="fs-4" style="color: #d11141">Add Product</p>
+
+                            <th:block th:if="${session.succMsg}">
+                                <p class="text-success fw-bold">[[${session.succMsg}]]</p>
+                                <th:block th:text="${@commnServiceImpl.removeSessionMessage()}"></th:block>
+                            </th:block>
+
+                            <th:block th:if="${session.errorMsg}">
+                                <p class="text-danger fw-bold">[[${session.errorMsg}]]</p>
+                                <th:block th:text="${@commnServiceImpl.removeSessionMessage()}"></th:block>
+                            </th:block>
+                        </div>
+                        <div class="card-body">
+                            <form action="/admin/saveProduct" method="post" enctype="multipart/form-data">
+                                <div class="mb-3">
+                                    <label class="form-label">Enter Title</label>
+                                    <input type="text" name="title" class="form-control">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Enter Description</label>
+                                    <textarea rows="3" cols="" class="form-control" name="description"></textarea>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Category</label>
+                                    <select class="form-control" name="category">
+                                        <option>--select--</option>
+                                        <option th:each="c:${categories}">[[${c.name}]]</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Enter Price</label>
+                                    <input type="number" name="price" class="form-control">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Status</label>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" checked value="true" name="isActive" id="flexRadioDefault1">
+                                        <label class="form-check-label" for="flexRadioDefault1">Active</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="isActive" value="false" id="flexRadioDefault2">
+                                        <label class="form-check-label" for="flexRadioDefault2">Inactive</label>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="mb-3 col">
+                                        <label class="form-label">Enter Stock</label>
+                                        <input type="text" name="stock" class="form-control">
+                                    </div>
+
+                                    <div class="mb-3 col">
+                                        <label class="form-label">Upload Image</label>
+                                        <input type="file" name="file" class="form-control">
+                                    </div>
+                                </div>
+
+                                <button class="btn woman-friendly-btn col-md-12 btn-blush">Submit</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

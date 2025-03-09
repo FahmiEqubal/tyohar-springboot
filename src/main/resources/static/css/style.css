@@ -1,0 +1,87 @@
+@charset "ISO-8859-1";
+
+.card-sh {
+	box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.3);
+}
+
+.cat-div {
+	box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+}
+
+.error {
+	color: red;
+}
+
+/* Custom Button Classes */
+.btn-blush {
+	background-color: #fce4ec;
+	/* Light blush pink */
+	border-color: #fce4ec;
+	color: #880e4f;
+	/* Darker rose */
+	border-radius: 5px;
+	padding: 10px 20px;
+}
+
+.btn-blush:hover {
+	background-color: #f8bbd0;
+	/* Slightly darker blush */
+	border-color: #f8bbd0;
+	color: #880e4f;
+}
+
+.btn-lavender {
+	background-color: #e1bee7;
+	/* Light lavender */
+	border-color: #e1bee7;
+	color: #512da8;
+	/* Darker purple */
+	border-radius: 5px;
+	padding: 10px 20px;
+}
+
+.btn-lavender:hover {
+	background-color: #ce93d8;
+	/* Slightly darker lavender */
+	border-color: #ce93d8;
+	color: #512da8;
+}
+
+.btn-peach {
+	background-color: #ffe0b2;
+	/* Light peach */
+	border-color: #ffe0b2;
+	color: #e65100;
+	/* Darker orange */
+	border-radius: 5px;
+	padding: 10px 20px;
+}
+
+.btn-peach:hover {
+	background-color: #ffcc80;
+	/* Slightly darker peach */
+	border-color: #ffcc80;
+	color: #e65100;
+}
+
+.btn-mint {
+	background-color: #c8e6c9;
+	/* Light mint */
+	border-color: #c8e6c9;
+	color: #1b5e20;
+	/* Darker green */
+	border-radius: 5px;
+	padding: 10px 20px;
+}
+
+.btn-mint:hover {
+	background-color: #a5d6a7;
+	/* Slightly darker mint */
+	border-color: #a5d6a7;
+	color: #1b5e20;
+}
+
+/*btn-blush: A soft pink, reminiscent of blush.
+btn-lavender: A light, calming lavender.
+btn-peach: A warm, gentle peach.
+btn-mint: A fresh, subtle mint green.*/

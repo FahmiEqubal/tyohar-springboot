@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base::layout(~{::section})}">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Handcrafted Treasures & Gifts | TYOHAR</title>
+</head>
+<body>
+    <section>
+        <div class="row">
+            <div class="col-md-12 p-5">
+                <div class="d-flex align-items-center justify-content-center mb-4">
+                    <img alt="TYOHAR Logo" src="img/logo.png" width="60px" height="60px" class="rounded-circle me-3">
+                    <div>
+                        <h2 class="fs-4 fw-bold mb-1 text-center">Welcome to TYOHAR</h2>
+                        <p class="text-muted mb-0 text-center">Discover Unique Handcrafted Creations.</p>
+                    </div>
+                </div>
+                <p class="lead text-center">
+                    Explore our curated collection of handcrafted items, including exquisite epoxy resin creations and beautifully designed trousseau packaging. We are dedicated to providing you with unique, high-quality products that add a touch of elegance to your life.
+                </p>
+                <p class="text-center">
+                    From personalized gifts to stunning decorative pieces, our creations are made with passion and attention to detail. Browse our categories and find the perfect handmade treasure today!
+                </p>
+            </div>
+
+            <div class="container">
+                <div class="row justify-content-center">
+                    <p class="text-center fs-4 mb-4">Categories</p>
+                    <div class="col-md-2 col-sm-6 mb-4" th:each="c:${category}">
+                        <div class="card shadow-sm h-100">
+                            <div class="card-body text-center p-2 d-flex flex-column justify-content-center align-items-center" th:onclick="'window.location.href=\'' + @{'/products?category='+${c.name}} + '\''" style="cursor: pointer;">
+                                <img th:src="@{'img/category_img/'+${c.imageName}}" class="rounded-circle" alt="Category Image" style="width: 100px; height: 100px; object-fit: cover;">
+                                <div class="mt-1">
+                                    [[${c.name}]]
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container-fluid bg-light p-4">
+                <div class="row justify-content-center">
+                    <p class="text-center fs-4 mb-4">Featured Products</p>
+                    <div class="col-md-3 col-sm-6 mb-4" th:each="p:${products}">
+                        <div class="card shadow-sm h-100">
+                            <div class="card-body text-center p-2 d-flex flex-column justify-content-center align-items-center" th:onclick="'window.location.href=\'' + @{'/product/'+${p.id}} + '\''" style="cursor: pointer;">
+                                <img th:src="@{'img/product_img/'+${p.image}}" class="rounded-circle" alt="Product Image" style="width: 100px; height: 100px; object-fit: cover;">
+                                <div class="mt-1">
+                                    [[${p.title}]]
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

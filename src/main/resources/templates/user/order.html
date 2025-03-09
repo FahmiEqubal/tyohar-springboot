@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base::layout(~{::section})}">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Order Placement</title>
+
+	<!-- jQuery & Razorpay Checkout -->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+</head>
+
+<body>
+	<section>
+		<div class="container mt-5 p-5">
+			<form action="/user/save-order" method="post" id="orders" novalidate>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="mb-4 text-center">
+							<h4>Billing Address</h4>
+							<hr>
+						</div>
+						<div class="row mb-3">
+							<div class="col">
+								<label for="firstName" class="form-label">First Name</label>
+								<input type="text" name="firstName" id="firstName" class="form-control" required>
+							</div>
+							<div class="col">
+								<label for="lastName" class="form-label">Last Name</label>
+								<input type="text" name="lastName" id="lastName" class="form-control" required>
+							</div>
+						</div>
+						<div class="row mb-3">
+							<div class="col">
+								<label for="email" class="form-label">Email</label>
+								<input type="email" name="email" id="email" class="form-control" required>
+							</div>
+							<div class="col">
+								<label for="mobileNo" class="form-label">Mobile Number</label>
+								<input type="text" name="mobileNo" id="mobileNo" class="form-control" required>
+							</div>
+						</div>
+						<div class="mb-3">
+							<label for="address" class="form-label">Address</label>
+							<input type="text" name="address" id="address" class="form-control" required>
+						</div>
+						<div class="row mb-3">
+							<div class="col">
+								<label for="city" class="form-label">City</label>
+								<input type="text" name="city" id="city" class="form-control" required>
+							</div>
+							<div class="col">
+								<label for="state" class="form-label">State</label>
+								<input type="text" name="state" id="state" class="form-control" required>
+							</div>
+						</div>
+						<div class="mb-3">
+							<label for="pincode" class="form-label">Pincode</label>
+							<input type="number" name="pincode" id="pincode" class="form-control" required>
+						</div>
+					</div>
+
+					<div class="col-md-6">
+						<div class="mb-4 text-center">
+							<h4>Payment Type</h4>
+							<hr>
+						</div>
+						<div class="card mb-3">
+							<div class="card-body">
+								<table class="table table-borderless">
+									<tbody>
+										<tr>
+											<td>Total Price</td>
+											<td>:</td>
+											<td>&#8377; <span id="displayOrderPrice" th:text="${orderPrice}"></span>
+											</td>
+										</tr>
+										<tr>
+											<td>Delivery Fee</td>
+											<td>:</td>
+											<td>&#8377; 250</td>
+										</tr>
+										<tr>
+											<td>Tax</td>
+											<td>:</td>
+											<td>&#8377; 100</td>
+										</tr>
+										<tr class="border-top">
+											<td>Total Price</td>
+											<td>:</td>
+											<td>&#8377; <span id="displayTotalPrice"
+													th:text="${totalOrderPrice}"></span></td>
+											<input type="hidden" id="totalOrderPrice" name="totalAmount"
+												th:value="${totalOrderPrice}">
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+
+						<div class="card shadow p-3 bg-body-tertiary rounded">
+							<div class="card-body">
+								<div class="mb-3">
+									<label for="paymentType" class="form-label">Select Payment Type</label>
+									<select name="paymentType" id="paymentType" class="form-control" required>
+										<option value="">--select--</option>
+										<option value="COD">Cash On Delivery</option>
+										<option value="ONLINE">Online Payment</option>
+									</select>
+								</div>
+
+								<input type="hidden" name="razorpayOrderId" id="razorpayOrderId">
+								<input type="hidden" name="razorpayPaymentId" id="razorpayPaymentId">
+								<input type="hidden" name="razorpaySignature" id="razorpaySignature">
+
+								<button type="submit" id="placeOrderButton" class="btn btn-primary w-100">
+									Place Order
+								</button>
+
+								<div id="paymentError" class="text-danger mt-2"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</section>
+
+	<script>
+		$.post("/user/save-order", orderData)
+		    .done(function (response) {
+		        if (response.redirect) {
+		            window.location.href = response.redirect;  // ✅ Redirect to success page
+		        } else if (response.orderId) {
+		            // Razorpay Payment Flow
+		            let options = {
+		                "key": "rzp_live_cWGcAi9NISkX9Z",
+		                "amount": response.amount * 100,
+		                "currency": "INR",
+		                "order_id": response.orderId,
+		                "handler": function (paymentResponse) {
+		                    $.post("/user/verify-payment", {
+		                        razorpay_payment_id: paymentResponse.razorpay_payment_id,
+		                        razorpay_order_id: paymentResponse.razorpay_order_id
+		                    }).done(function (verifyResponse) {
+		                        window.location.href = verifyResponse.redirect;  // ✅ Redirect after successful payment
+		                    }).fail(function () {
+		                        window.location.href = "/user/payment_failed";  // Redirect on failure
+		                    });
+		                }
+		            };
+		            let rzp = new Razorpay(options);
+		            rzp.open();
+		        }
+		    })
+		    .fail(function () {
+		        alert("Order creation failed. Please try again.");
+		    });
+
+	</script>
+</body>
+
+</html>

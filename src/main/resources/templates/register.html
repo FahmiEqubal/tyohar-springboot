@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base::layout(~{::section})}">
+<head>
+    <meta charset="UTF-8">
+    <title>Register - Tyohar by Garden Gems</title>
+    <style>
+        section {
+            background-color: #f8f0e3; /* Light, warm background */
+        }
+        .container {
+            padding-top: 50px;
+        }
+        .card {
+            border: 1px solid #e9c2a6; /* Soft peach border */
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .card-header, .card-footer {
+            background-color: #f3e5f5; /* Light lavender header/footer */
+            border-bottom: 1px solid #e9c2a6;
+        }
+        .card-header p {
+            color: #4a274f; /* Deep plum text */
+            font-weight: 500;
+        }
+        .form-label {
+            color: #4a274f;
+            font-weight: 500;
+        }
+        .btn-primary {
+            background-color: #8c5299; /* Soft purple button */
+            border-color: #8c5299;
+        }
+        .btn-primary:hover {
+            background-color: #6a3a75;
+            border-color: #6a3a75;
+        }
+        .text-decoration-none {
+            color: #8c5299;
+        }
+        .text-decoration-none:hover {
+            color: #6a3a75;
+        }
+        .about-section {
+            text-align: justify;
+            color: #4a274f;
+        }
+        .about-section img {
+            border-radius: 50%;
+            margin-bottom: 15px;
+        }
+        .about-section p {
+            line-height: 1.6;
+        }
+        .text-success {
+            color: #388e3c;
+        }
+        .text-danger {
+            color: #d81b60;
+        }
+    </style>
+</head>
+<body>
+    <section>
+        <div class="container mt-5 p-5">
+            <div class="row">
+                <div class="col-md-6 p-5 about-section">
+                    <img alt="Tyohar Logo" src="img/logo.png" width="50px" height="50px" style="border-radius: 50%;">
+                    <p>Welcome to TYOHAR, where innovation and creativity meet excellence. Founded in 2023, we have been at the forefront of curating Handmade items using Epoxy Resin & trousseau packaging for years, delivering handmade masterpieces to meet the evolving needs of our clients. Our commitment to quality, creativity, and customer satisfaction drives everything we do. From our dedicated team of artists, we strive to exceed expectations and set new standards in the industry. Join us on our journey as we continue to craft happiness for you.</p>
+                </div>
+                <div class="col-md-6 p-2">
+                    <div class="card shadow p-3 mb-5 rounded">
+                        <div class="card-header text-center">
+                            <p class="fs-4 text-center">Register</p>
+                            <th:block th:if="${session.succMsg}">
+                                <p class="text-success fw-bold">[[${session.succMsg}]]</p>
+                                <th:block th:text="${@commnServiceImpl.removeSessionMessage()}"></th:block>
+                            </th:block>
+                            <th:block th:if="${session.errorMsg}">
+                                <p class="text-danger fw-bold">[[${session.errorMsg}]]</p>
+                                <th:block th:text="${@commnServiceImpl.removeSessionMessage()}"></th:block>
+                            </th:block>
+                        </div>
+                        <div class="card-body">
+                            <form action="/saveUser" enctype="multipart/form-data" id="userRegister" novalidate method="post">
+                                <div class="row mb-3">
+                                    <div class="col">
+                                        <label class="form-label">Full Name</label>
+                                        <input required class="form-control" name="name" type="text">
+                                    </div>
+                                    <div class="col">
+                                        <label class="form-label">Mobile Number</label>
+                                        <input required class="form-control" name="mobileNumber" type="number">
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Email</label>
+                                    <input required class="form-control" name="email" type="email">
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col">
+                                        <label class="form-label">Address</label>
+                                        <input required class="form-control" name="address" type="text">
+                                    </div>
+                                    <div class="col">
+                                        <label class="form-label">City</label>
+                                        <input required class="form-control" name="city" type="text">
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col">
+                                        <label class="form-label">State</label>
+                                        <input required class="form-control" name="state" type="text">
+                                    </div>
+                                    <div class="col">
+                                        <label class="form-label">Pincode</label>
+                                        <input required class="form-control" name="pincode" type="number">
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col">
+                                        <label class="form-label">Password</label>
+                                        <input required class="form-control" name="password" type="password" id="pass">
+                                    </div>
+                                    <div class="col">
+                                        <label class="form-label">Confirm Password</label>
+                                        <input required class="form-control" name="confirmpassword" type="password">
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Profile Image</label>
+                                    <input class="form-control" name="img" type="file">
+                                </div>
+                                <button type="submit" class="btn btn-primary col-md-12">Register</button>
+                            </form>
+                        </div>
+                        <div class="card-footer text-center">
+                            Have an account? <a href="/signin" class="text-decoration-none">Login</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

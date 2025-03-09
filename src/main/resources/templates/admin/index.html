@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base::layout(~{::section})}">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Admin Dashboard</title>
+    <style>
+        .card-sh {
+            border: 1px solid #f0f0f0;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .card-sh:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .woman-friendly-card {
+            background-color: #f8f0f5; /* Light blush/pink */
+            border: 1px solid #fce4ec; /* Lighter pink border */
+        }
+    </style>
+</head>
+<body>
+    <section>
+        <div class="container p-5">
+            <p class="text-center fs-3 mt-4" style="color: #d11141">Admin Dashboard</p> <div class="row p-5">
+                <div class="col-md-4 mt-2">
+                    <a href="/admin/loadAddProduct" class="text-decoration-none">
+                        <div class="card card-sh woman-friendly-card">
+                            <div class="card-body text-center" style="color: #e91e63"> <i class="fa-solid fa-square-plus fa-3x"></i>
+                                <h4 class="mt-2 ">Add Product</h4>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-md-4 mt-2">
+                    <a href="/admin/category" class="text-decoration-none">
+                        <div class="card card-sh woman-friendly-card">
+                            <div class="card-body text-center" style="color: #ffab91"> <i class="fa-solid fa-list fa-3x"></i>
+                                <h4 class="mt-2">Add Category</h4>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-md-4 mt-2">
+                    <a href="/admin/products" class="text-decoration-none">
+                        <div class="card card-sh woman-friendly-card">
+                            <div class="card-body text-center" style="color: #81c784"> <i class="fa-solid fa-table-list fa-3x"></i>
+                                <h4 class="mt-2">View Product</h4>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-md-4 mt-4">
+                    <a href="/admin/orders" class="text-decoration-none">
+                        <div class="card card-sh woman-friendly-card">
+                            <div class="card-body text-center" style="color: #ffcc80"> <i class="fa-solid fa-box-open fa-3x"></i>
+                                <h4 class="mt-2">Orders</h4>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-md-4 mt-4">
+                    <a href="/admin/users?type=1" class="text-decoration-none">
+                        <div class="card card-sh woman-friendly-card">
+                            <div class="card-body text-center" style="color: #64b5f6"> <i class="fa-solid fa-circle-user fa-3x"></i>
+                                <h4 class="mt-2">Users</h4>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-md-4 mt-4">
+                    <a href="/admin/add-admin" class="text-decoration-none">
+                        <div class="card card-sh woman-friendly-card">
+                            <div class="card-body text-center" style="color: #64b5f6">
+                                <i class="fa-solid fa-user-plus fa-3x"></i>
+                                <h4 class="mt-2">Add Admin</h4>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-md-4 mt-4">
+                    <a href="/admin/users?type=2" class="text-decoration-none">
+                        <div class="card card-sh woman-friendly-card">
+                            <div class="card-body text-center" style="color: #64b5f6">
+                                <i class="fa-solid fa-circle-user fa-3x"></i>
+                                <h4 class="mt-2">Admin</h4>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
